@@ -3,6 +3,15 @@ import deleteIcon from './components/deleteIcon.js';
 
 const btn = document.querySelector('[data-form-btn]');
 
+const addTask = (evento) => {
+  const list = document.querySelector('[data-list]');
+  const task = createTask(evento);
+  list.appendChild(task);
+
+
+}
+
+
 const createTask = (evento) => {
   evento.preventDefault();
   //lo deabajo es para calendario
@@ -11,12 +20,11 @@ const createTask = (evento) => {
   const value = input.value;
   const date = calendar.value;
   const dateFormat = moment(date).format("DD/MM/YYYY");
-  console.log(dateFormat)
   console.log(moment(date).format("DD/MM/YYYY"))
 
 
+
   
-  const list = document.querySelector('[data-list]');
   const task = document.createElement('li');
   task.classList.add('card');
   input.value = '';
@@ -30,11 +38,15 @@ const createTask = (evento) => {
   taskContent.appendChild(titleTask);
   // task.innerHTML = content;
 
+  const dateElement =  document.createElement("span");
+  dateElement.innerHTML = dateFormat;
+
   task.appendChild(taskContent);
+  task.appendChild(dateElement);
   task.appendChild(deleteIcon());
-  list.appendChild(task);
+  return task  //sino se pone esto , el addtask no puede jalar la infomración de este módulo
 };
 
 //Arrow functions o funciones anonimas
-btn.addEventListener('click', createTask);
+btn.addEventListener('click', addTask);
 
