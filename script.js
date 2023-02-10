@@ -5,8 +5,17 @@ const btn = document.querySelector('[data-form-btn]');
 
 const createTask = (evento) => {
   evento.preventDefault();
+  //lo deabajo es para calendario
   const input = document.querySelector('[data-form-input]');
+  const calendar = document.querySelector('[data-form-date]');
   const value = input.value;
+  const date = calendar.value;
+  const dateFormat = moment(date).format("DD/MM/YYYY");
+  console.log(dateFormat)
+  console.log(moment(date).format("DD/MM/YYYY"))
+
+
+  
   const list = document.querySelector('[data-list]');
   const task = document.createElement('li');
   task.classList.add('card');
@@ -28,3 +37,4 @@ const createTask = (evento) => {
 
 //Arrow functions o funciones anonimas
 btn.addEventListener('click', createTask);
+
