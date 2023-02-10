@@ -31,6 +31,14 @@ const createTask = (evento) => {
   //backticks
   const taskContent = document.createElement('div');
 
+  const taskObj = {     //esto es un objeto
+    value,
+    dateFormat
+  }
+
+  sessionStorage.setItem("tasks",JSON.stringify(taskObj));
+
+
   const titleTask = document.createElement('span');
   titleTask.classList.add('task');
   titleTask.innerText = value;
