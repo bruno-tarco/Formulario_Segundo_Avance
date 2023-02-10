@@ -11,6 +11,7 @@ const addTask = (evento) => {
 
 }
 
+const tasklist = []   //esto significará q es un arreglo
 
 const createTask = (evento) => {
   evento.preventDefault();
@@ -36,7 +37,10 @@ const createTask = (evento) => {
     dateFormat
   }
 
-  sessionStorage.setItem("tasks",JSON.stringify(taskObj));
+  tasklist.push(taskObj)
+
+  /*sessionStorage.setItem("tasks",JSON.stringify(taskObj));*/  //funciona para almanecar en la sesión , si se cierra la página se reinicia la información guardada
+  localStorage.setItem("tasks",JSON.stringify(tasklist)); // almancena y guarda incluso si se cierra la página web
 
 
   const titleTask = document.createElement('span');
