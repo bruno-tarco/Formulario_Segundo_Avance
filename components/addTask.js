@@ -3,48 +3,47 @@ import deleteIcon from './deleteIcon.js';
 
 
 export const addTask = (evento) => {
+  
+    evento.preventDefault();
+
     const list = document.querySelector('[data-list]');
-    const task = createTask(evento);
+    const input = document.querySelector('[data-form-input]');
+    const calendar = document.querySelector('[data-form-date]');
+   
+    const value = input.value;
+    const date = calendar.value;
+    const dateFormat = moment(date).format("DD/MM/YYYY");
+    
+    
+
+    input.value = '';
+    calendar.value = '';
+
+    const taskObj = {     //esto es un objeto
+        value,
+        dateFormat
+      }
+
+    const tasklist = JSON.parse(localStorage.getItem("tasks")) || [];//esto significará que si el lado izquierdo está vacio entonces será el lado derecho
+    tasklist.push(taskObj)
+    /*sessionStorage.setItem("tasks",JSON.stringify(taskObj));*/  //funciona para almanecar en la sesión , si se cierra la página se reinicia la información guardada
+    localStorage.setItem("tasks",JSON.stringify(tasklist)); // almancena y guarda incluso si se cierra la página web
+
+    const task = createTask(taskObj);
     list.appendChild(task);
-  
-  
   }
   
    
   
-  const createTask = (evento) => {
-    evento.preventDefault();
-    const tasklist = JSON.parse(localStorage.getItem("tasks")) || [];//esto significará que si el lado izquierdo está vacio entonces será el lado derecho
-    
-    console.log(tasklist);
-    //lo deabajo es para calendario
-    const input = document.querySelector('[data-form-input]');
-    const calendar = document.querySelector('[data-form-date]');
-    const value = input.value;
-    const date = calendar.value;
-    const dateFormat = moment(date).format("DD/MM/YYYY");
-    console.log(moment(date).format("DD/MM/YYYY"))
-  
-  
-  
-    
+  const createTask = ({value, dateFormat}) => {
+ 
     const task = document.createElement('li');
     task.classList.add('card');
-    input.value = '';
-    //backticks
     const taskContent = document.createElement('div');
+
+
   
-    const taskObj = {     //esto es un objeto
-      value,
-      dateFormat
-    }
-  
-    tasklist.push(taskObj)
-  
-    /*sessionStorage.setItem("tasks",JSON.stringify(taskObj));*/  //funciona para almanecar en la sesión , si se cierra la página se reinicia la información guardada
-    localStorage.setItem("tasks",JSON.stringify(tasklist)); // almancena y guarda incluso si se cierra la página web
-  
-  
+   
     const titleTask = document.createElement('span');
     titleTask.classList.add('task');
     titleTask.innerText = value;
