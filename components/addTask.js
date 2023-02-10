@@ -14,8 +14,9 @@ export const addTask = (evento) => {
   
   const createTask = (evento) => {
     evento.preventDefault();
-    const tasklist = JSON.parse(localStorage.getItem("tasks")) || [];//esto significará q es un arreglo
-    console.log("tasklist");
+    const tasklist = JSON.parse(localStorage.getItem("tasks")) || [];//esto significará que si el lado izquierdo está vacio entonces será el lado derecho
+    
+    console.log(tasklist);
     //lo deabajo es para calendario
     const input = document.querySelector('[data-form-input]');
     const calendar = document.querySelector('[data-form-date]');
